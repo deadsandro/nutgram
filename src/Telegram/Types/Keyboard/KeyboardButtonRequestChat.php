@@ -2,6 +2,7 @@
 
 namespace SergiX44\Nutgram\Telegram\Types\Keyboard;
 
+use JsonSerializable;
 use SergiX44\Nutgram\Telegram\Types\BaseType;
 use SergiX44\Nutgram\Telegram\Types\Chat\ChatAdministratorRights;
 
@@ -10,7 +11,7 @@ use SergiX44\Nutgram\Telegram\Types\Chat\ChatAdministratorRights;
  * The identifier of the selected chat will be shared with the bot when the corresponding button is pressed.
  * @see https://core.telegram.org/bots/api#keyboardbuttonrequestchat
  */
-class KeyboardButtonRequestChat extends BaseType
+class KeyboardButtonRequestChat extends BaseType implements JsonSerializable
 {
     /**
      * Signed 32-bit identifier of the request
@@ -58,4 +59,18 @@ class KeyboardButtonRequestChat extends BaseType
      * Otherwise, no additional restrictions are applied.
      */
     public ?bool $bot_is_member = null;
+
+    public function jsonSerialize(): array
+    {
+        return array_filter([
+            'request_id' => $this->request_id,
+            'chat_is_channel' => $this->chat_is_channel,
+            'chat_is_forum' => $this->chat_is_forum,
+            'chat_has_username' => $this->chat_has_username,
+            'chat_is_created' => $this->chat_is_created,
+            'user_administrator_rights' => $this->user_administrator_rights,
+            'bot_administrator_rights' => $this->bot_administrator_rights,
+            'bot_is_member' => $this->bot_is_member,
+        ]);
+    }
 }
