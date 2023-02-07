@@ -371,6 +371,15 @@ trait MessageHandlers
      * @param $callable
      * @return Handler
      */
+    public function onForumTopicEdited($callable): Handler
+    {
+        return $this->handlers[UpdateTypes::MESSAGE][MessageTypes::FORUM_TOPIC_EDITED][] = new Handler($callable);
+    }
+
+    /**
+     * @param $callable
+     * @return Handler
+     */
     public function onVideoChatScheduled($callable): Handler
     {
         return $this->handlers[UpdateTypes::MESSAGE][MessageTypes::VIDEO_CHAT_SCHEDULED][] = new Handler($callable);
