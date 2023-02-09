@@ -9,7 +9,7 @@ class ForumTopicEdited extends BaseType
     /**
      * Optional. New name of the topic, if it was edited
      */
-    public string $name;
+    public ?string $name = null;
 
     /**
      * Optional. New identifier of the custom emoji shown as the topic icon, if it was edited;
